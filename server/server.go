@@ -11,7 +11,7 @@ import (
 	"regexp"        // regex all the things
 )
 
-// pate type
+// Page type
 type Page struct {
 	Title string
 	Body  []byte
