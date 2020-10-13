@@ -1,10 +1,9 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
 func get(w http.ResponseWriter, r *http.Request) {
@@ -41,9 +40,9 @@ func main() {
 	r := mux.NewRouter()
 	api := r.PathPrefix("/api/v1").Subrouter()
 	api.HandleFunc("/", get).Methods(http.MethodGet)
-	pi.HandleFunc("/", post).Methods(http.MethodPost)
-	pi.HandleFunc("/", put).Methods(http.MethodPut)
-	pi.HandleFunc("/", delete).Methods(http.MethodDelete)
-	pi.HandleFunc("/", notFound)
+	api.HandleFunc("/", post).Methods(http.MethodPost)
+	api.HandleFunc("/", put).Methods(http.MethodPut)
+	api.HandleFunc("/", delete).Methods(http.MethodDelete)
+	api.HandleFunc("/", notFound)
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
